@@ -3,6 +3,7 @@ from discord.utils import get
 import random
 
 client = discord.Client()
+#Settings
 confirmEjects = ["Yes", "No"]
 emergencyMeeting = [0,1,2,3,4,5,6,7,8,9]
 emergencyCooldown = [0,5,10,15,20,25,30,35,40,45,50,55,60]
@@ -25,6 +26,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+  #Commands
   if message.author == client.user:
     return
 
@@ -34,7 +36,9 @@ async def on_message(message):
   if message.content.upper() == '!HELP':
     await message.channel.send('Type !r followed by ANY of the following (cejects, emeeting, ecooldown, dtime, vtime, pspeed, cvision, ivision, kcooldown, kdistance, vtasks, ctasks, ltasks, stasks) USE A COMMA after EACH COMMAND when using MORE THAN ONE command')
 
+  #Setting options for user to input
   command = ["cejects", "emeeting", "ecooldown", "dtime", "vtime", "pspeed", "cvision", "ivision", "kcooldown", "kdistance", "vtasks", "ctasks", "ltasks", "stasks"]
+  #All options
   if message.content.split()[0].upper() == '!R' and message.content.partition(' ')[2].upper() == "ALL":
     text = " "
     text += 'Confirm Ejects: ' + str(random.choice(confirmEjects)) + " \n"
@@ -53,6 +57,7 @@ async def on_message(message):
     text += '# of Short Tasks: ' + str(random.choice(shortTasks)) + " \n"
     await message.channel.send(text)
 
+  #Particular Options
   elif message.content.split()[0].upper() == '!R' and any(item in message.content.partition(' ')[2].split(", ") for item in command) is True:
     userInput = message.content.partition(' ')[2].split(", ")
     text = " "
@@ -95,4 +100,4 @@ async def on_message(message):
 
 
 
-client.run('NzU5OTAzMTIzMTc0MDY0MTQw.X3EQ7g.-Ddl11CxFqH1eVKUMg1lqMrJppk')
+client.run(#Bot-Token)
